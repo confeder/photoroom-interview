@@ -2,10 +2,10 @@ from django.contrib.auth.models import Group, User
 from rest_framework import serializers
 
 
-class UserSerializer(serializers.ModelSerializer):
+class TeamUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "email"]
+        fields = ["id", "username"]
 
 
 class TeamSerializer(serializers.ModelSerializer):
@@ -14,4 +14,4 @@ class TeamSerializer(serializers.ModelSerializer):
         fields = ["id", "name", "users"]
         depth = 2
 
-    users = UserSerializer(many=True, read_only=True, source="user_set")
+    users = TeamUserSerializer(many=True, read_only=True, source="user_set")

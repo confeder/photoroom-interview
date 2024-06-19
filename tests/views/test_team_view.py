@@ -30,7 +30,7 @@ def test_team_view_only_lists_members_user_is_member_of(user_a, user_a_client):
             "users": [
                 {
                     "id": user_a.id,
-                    "email": user_a.email,
+                    "username": user_a.username,
                 }
             ],
         },
@@ -53,7 +53,7 @@ def test_team_view_allows_creating_team(user_a, user_a_client):
         "users": [
             {
                 "id": user_a.id,
-                "email": user_a.email,
+                "username": user_a.username,
             },
         ],
     }
@@ -100,7 +100,7 @@ def test_team_view_allows_changing_team_name(user_a, user_a_client):
         "users": [
             {
                 "id": user_a.id,
-                "email": user_a.email,
+                "username": user_a.username,
             }
         ],
     }
