@@ -6,6 +6,7 @@ from .admin import admin_site
 
 router = routers.DefaultRouter()
 router.register(r"teams", views.TeamViewSet, basename="team")
+router.register(r"palletes", views.ColorPalleteViewSet, basename="palletes")
 
 urlpatterns = [
     path("", views.index, name="index"),

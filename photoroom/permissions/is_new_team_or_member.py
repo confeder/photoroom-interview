@@ -23,8 +23,8 @@ class IsNewTeamOrMember(permissions.BasePermission):
         )
 
     def has_object_permission(self, request: Request, view, group: Group) -> bool:
-        is_member_of_group = request.user.groups.filter(id=group.id).exists()  # type: ignore[union-attr]
-        if not is_member_of_group:
+        is_member_of_team = request.user.groups.filter(id=group.id).exists()  # type: ignore[union-attr]
+        if not is_member_of_team:
             return False
 
         if view.action in ("update", "partial_update"):
