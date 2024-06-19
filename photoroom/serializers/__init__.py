@@ -1,1 +1,3 @@
-__all__: list[str] = []
+from .team import TeamSerializer
+
+__all__ = ["TeamSerializer"]
