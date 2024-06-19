@@ -1,6 +1,6 @@
 from django.contrib.auth.models import Group
 from django.db.models import QuerySet
-from rest_framework import serializers, viewsets
+from rest_framework import authentication, serializers, viewsets
 from rest_framework.decorators import action
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -18,6 +18,7 @@ class TeamMembershipSerializer(serializers.ModelSerializer):
 class TeamViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = TeamSerializer
+    authentication_classes = [authentication.BasicAuthentication]
     permission_classes = [IsNewTeamOrMember]
 
     def perform_create(self, serializer) -> None:

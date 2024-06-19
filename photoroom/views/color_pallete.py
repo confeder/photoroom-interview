@@ -1,5 +1,5 @@
 from django.db.models import QuerySet
-from rest_framework import viewsets
+from rest_framework import authentication, viewsets
 
 from photoroom.models import ColorPallete
 from photoroom.permissions import IsColorPalleteTeamMember
@@ -9,6 +9,7 @@ from photoroom.serializers import ColorPalleteSerializer
 class ColorPalleteViewSet(viewsets.ModelViewSet):
     queryset = ColorPallete.objects.select_related("owner").all()
     serializer_class = ColorPalleteSerializer
+    authentication_classes = [authentication.BasicAuthentication]
     permission_classes = [IsColorPalleteTeamMember]
 
     def get_queryset(self) -> QuerySet[ColorPallete]:

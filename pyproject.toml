@@ -21,6 +21,7 @@ dependencies = [
     "psycopg[binary,pool]==3.1.19",
     "django-colorfield==0.11.0",
     "django-better-admin-arrayfield==1.4.2",
+    "coreapi==2.3.3",
 ]
 
 [project.optional-dependencies]
@@ -40,7 +41,7 @@ dev = [
 ]
 
 [build-system]
-requires = ["setuptools~=70.0.0"]
+requires = ["setuptools~=69.5.1"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]

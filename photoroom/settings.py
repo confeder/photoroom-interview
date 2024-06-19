@@ -86,11 +86,10 @@ MIDDLEWARE = [
 
 REST_FRAMEWORK = {
     "DEFAULT_VERSION": "1.0",
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.BasicAuthentication",
-    ],
-    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.DjangoModelPermissions"],
+    "DEFAULT_AUTHENTICATION_CLASSES": [],
+    "DEFAULT_PERMISSION_CLASSES": [],
     "DEFAULT_VERSIONING_CLASS": "rest_framework.versioning.AcceptHeaderVersioning",
+    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
     "DEFAULT_RENDERER_CLASSES": [
         "photoroom.renderers.VendoredJSONRenderer",
         "rest_framework.renderers.BrowsableAPIRenderer",
