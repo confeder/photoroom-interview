@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "photoroom",
     "rest_framework",
     "rest_framework.authtoken",
+    "colorfield",
 ]
 
 DATABASES = {
