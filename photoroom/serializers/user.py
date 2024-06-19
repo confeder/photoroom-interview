@@ -30,7 +30,7 @@ class UserSerializer(serializers.ModelSerializer):
 
         group = Group.objects.create(name=validated_data["username"])
 
-        user = User.objects.create(**validated_data)
+        user = User.objects.create_user(**validated_data)
         user.user_permissions.set(default_permissions)
         user.groups.add(group)
 
