@@ -144,7 +144,9 @@ exclude = "(env|build|dist|migrations)"
 
 [[tool.mypy.overrides]]
 module = [
-    "environ.*"
+    "environ.*",
+    "colorfield.*",
+    "django_better_admin_arrayfield.*",
 ]
 ignore_missing_imports = true
 

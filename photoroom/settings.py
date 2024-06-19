@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "colorfield",
+    "django_better_admin_arrayfield",
 ]
 
 DATABASES = {
