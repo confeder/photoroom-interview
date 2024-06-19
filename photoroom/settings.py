@@ -29,7 +29,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "photoroom",
     "rest_framework",
-    "rest_framework.authtoken",
     "colorfield",
     "django_better_admin_arrayfield",
 ]
@@ -88,12 +87,9 @@ MIDDLEWARE = [
 REST_FRAMEWORK = {
     "DEFAULT_VERSION": "1.0",
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework.authentication.BasicAuthentication",
     ],
-    "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.AllowAny"
-        # "rest_framework.permissions.DjangoModelPermissions"
-    ],
+    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.DjangoModelPermissions"],
     "DEFAULT_VERSIONING_CLASS": "rest_framework.versioning.AcceptHeaderVersioning",
     "DEFAULT_RENDERER_CLASSES": [
         "photoroom.renderers.VendoredJSONRenderer",
