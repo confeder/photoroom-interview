@@ -1,0 +1,16 @@
+# Python virtualenv
+env/
+venv/
+
+# Egg-info dirs
+*.egg-info
+
+# Coverage
+.coverage
+
+# Python bytecode
+*.pyc
+__pycache__
+
+# Ignore static files
+public/

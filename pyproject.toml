@@ -1,0 +1,151 @@
+[project]
+name = "photoroom"
+description = "Interview assignment for Photoroom"
+readme = "README.md"
+license = {file = "LICENSE"}
+version = "1.0.0"
+requires-python = ">= 3.12"
+keywords = ["photoroom"]
+classifiers = [
+    "Programming Language :: Python :: 3.12",
+    "Framework :: Django :: 5.0"
+]
+authors = [
+  {name = "Swen Kooij", email = "swenkooij@gmail.com"},
+]
+dependencies = [
+    "django==5.0.6",
+    "django-environ==0.11.2",
+    "pytest-django==4.8.0",
+    "djangorestframework==3.15.1",
+    "psycopg[binary,pool]==3.1.19"
+]
+
+[project.optional-dependencies]
+dev = [
+    "poethepoet==0.26.1",
+    "black==24.4.2",
+    "ruff==0.4.9",
+    "docformatter==1.7.5",
+    "mypy==1.10.0",
+    "django-stubs==5.0.2",
+    "django-stubs-ext==5.0.2",
+    "djangorestframework-stubs[mypy-compatible]==3.15.0",
+    "pytest==8.2.2",
+    "pytest-cov==5.0.0",
+    "coverage==7.5.3",
+]
+
+[build-system]
+requires = ["setuptools~=70.0.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["photoroom*"]
+exclude = ["tests*"]
+namespaces = false
+
+[tool.setuptools.package-data]
+"*" = ["**/*.html", "**/*.css", "**/*.txt", "**/*.js"]
+"photoroom" = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = "tests"
+pythonpath = ["."]
+DJANGO_SETTINGS_MODULE = "photoroom.settings"
+
+[tool.poe.tasks.fix]
+sequence = [
+    "format",
+    "lint_fix",
+    "format_docstrings",
+    "lint_types",
+    "verify_unmigrated",
+]
+help = "Lints & formats the code and fixes issues where possible."
+
+[tool.poe.tasks.verify]
+sequence = [
+    "verify_format",
+    "lint",
+    "verify_format_docstrings",
+    "lint_types",
+    "verify_unmigrated",
+]
+help = "Verifies the code is properly formatted and has no linting issues."
+
+[tool.poe.tasks.format]
+cmd = "python -m black ."
+help = "Formats the code."
+
+[tool.poe.tasks.verify_format]
+cmd = "python -m black --check ."
+help = "Verifies the code has been formatted correctly."
+
+[tool.poe.tasks.lint]
+cmd = "python -m ruff check ."
+help = "Lints the code."
+
+[tool.poe.tasks.lint_fix]
+cmd = "python -m ruff check --fix ."
+help = "Lints the code and automatically fixes issues where possible."
+
+[tool.poe.tasks.format_docstrings]
+shell = "python -m docformatter -r -i . || true"
+help = "Formats the doc strings."
+
+[tool.poe.tasks.verify_format_docstrings]
+cmd = "python -m docformatter -r -i ."
+help = "Verifies the doc strings has been formatted correctly."
+
+[tool.poe.tasks.lint_types]
+cmd = "python -m mypy --package photoroom"
+help = "Statically checks type hints."
+
+[tool.poe.tasks.verify_unmigrated]
+cmd = "python manage.py makemigrations --dry --check --no-color --skip-checks --no-input"
+help = "Verifies that there are no changes not covered by a migration."
+
+[tool.poe.tasks.test]
+cmd = "python -m pytest --cov photoroom"
+help = "Runs the tests."
+
+[tool.black]
+line-length = 89
+target-version = ['py312']
+include = '\.pyi?$'
+extend-exclude = '''
+(
+  /(
+    | env
+    | venv
+    | build
+    | dist
+    | .tox
+    | .direnv
+  )/
+)
+'''
+
+[tool.ruff]
+line-length = 89
+target-version = "py312"
+lint.ignore = ["E722", "E501", "W605", "N813"]
+lint.select = ["E", "F", "W", "I", "YTT"]
+exclude = ["migrations", "settings", "env", "venv", ".pytest_cache"]
+builtins = ["__version__"]
+
+[tool.mypy]
+python_version = "3.12"
+plugins = ["mypy_django_plugin.main", "mypy_drf_plugin.main"]
+exclude = "(env|build|dist|migrations)"
+
+[[tool.mypy.overrides]]
+module = [
+    "environ.*"
+]
+ignore_missing_imports = true
+
+[tool.django-stubs]
+django_settings_module = "photoroom.settings"
